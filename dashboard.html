@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Issue Tracker - Dashboard</title>
+    <link rel="shortcut icon" href="./assets/github-logo.png" type="image/x-icon">
+
+    <!-- tailwind+daisyUI -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- font awesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body class="bg-[#F8FAFC]">
+    <header class="flex items-center px-[5%] py-4 bg-white shadow-sm">
+        <div class="flex flex-1 items-center space-x-1">
+            <img src="./assets/github-logo.png" alt="github logo" class="w-8 h-8">
+            <h1 class="text-2xl">Github Issue Tracker</h1>
+        </div>
+        <div class="flex items-center space-x-4">
+            <label class="input">
+                <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <g
+                    stroke-linejoin="round"
+                    stroke-linecap="round"
+                    stroke-width="2.5"
+                    fill="none"
+                    stroke="currentColor"
+                    >
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.3-4.3"></path>
+                    </g>
+                </svg>
+                <input type="search" required placeholder="Search" />
+            </label>
+            <button class="btn btn-primary">+ New Issue</button>
+        </div>
+    </header>
+
+    <div class="container mx-auto py-16 space-y-4">
+        <div id="nav-btns" class="flex gap-2 bg-white p-4 shadow-sm rounded-md">
+            <button class="btn">All</button>
+            <button class="btn">Open</button>
+            <button class="btn">Closed</button>
+        </div>
+
+        <div class="bg-[#FBFBFB] rounded-md shadow-sm">
+            <div class="flex items-center p-4 bg-white shadow-sm rounded-t-md">
+                <img src="./assets/Aperture.png" alt="aperture" class="mr-4">
+                <div class="flex-1">
+                    <p class="font-semibold text-lg">50 Issues</p>
+                    <p class="text-sm text-[#64748B]">Track and manage your project issues</p>
+                </div>
+                <div class="space-x-4">
+                    <div class="inline-flex items-center">
+                        <span class="indicator-item status bg-[#00A96E]"></span>
+                        <span class="ms-1">Open</span>
+                    </div>
+                    <div class="inline-flex items-center">
+                        <span class="indicator-item status bg-[#A855F7]"></span>
+                        <span class="ms-1">Closed</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- issues container -->
+            <div id="issues-container" class="grid grid-cols-1 p-4 gap-4 md:grid-cols-2 lg:grid-cols-4">
+
+                <!-- make the card dynamic -->
+                <div class="card bg-base-100 shadow-sm border-t-4 border-[#00A96E]">
+                    
+                    <div class="px-4 pt-4 space-y-4">
+                        <div class="flex items-center justify-between mb-4">
+                            <img src="./assets/Open-Status.png" alt="open status">
+                            <div class="badge bg-[#FEECEC] text-[#EF4444] uppercase rounded-full">High</div>
+                        </div>
+                        <h2 class="card-title">Fix navigation menu on mobile devices</h2>
+                        <p class="text-[#64748B]">The navigation menu doesn't collapse properly on mobile devices...</p>
+                        <div class="flex gap-1 flex-wrap">
+                            <div class="badge bg-[#FEECEC] text-[#EF4444] uppercase rounded-full py-4 border border-[#FECACA]">
+                                <img src="./assets/bug-droid.png" alt="bug droid" class="w-4 h-4">
+                                <span>Bug</span>
+                            </div>
+                            <div class="badge bg-[#FFF8DB] text-[#D97706] uppercase rounded-full py-4 border border-[#FDE68A]">
+                                <img src="./assets/lifebuoy.png" alt="" class="w-4 h-4">
+                                <span class="whitespace-nowrap">Help Wanted</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="px-4 pb-4 space-y-2">
+                        <p class="text-[#64748B]">#1by john_doe</p>
+                        <p class="text-[#64748B]">1/15/2024</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="dashboard.js""></script>
+</body>
+</html>

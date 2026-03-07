@@ -12,6 +12,7 @@ loginFrom.addEventListener('submit', (e) => {
 
 const login = (username, password) => {
     if (username === 'admin' && password === 'admin123') {
+        
         window.location.href = 'dashboard.html';
     } else {
         window.location.href = 'login.html';
