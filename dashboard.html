@@ -64,75 +64,18 @@
             </div>
 
             <!-- issues container -->
-            <div id="issues-container" class="grid grid-cols-1 p-4 gap-4 md:grid-cols-2 lg:grid-cols-4">
-
-                <!-- make the card dynamic -->
-                <div class="card bg-base-100 shadow-sm border-t-4 border-[#00A96E]">
-                    
-                    <div class="px-4 pt-4 space-y-4">
-                        <div class="flex items-center justify-between mb-4">
-                            <img src="./assets/Open-Status.png" alt="open status">
-                            <div class="badge bg-[#FEECEC] text-[#EF4444] uppercase rounded-full">High</div>
-                        </div>
-                        <h2 class="card-title line-clamp-2">Fix navigation menu on mobile devices</h2>
-                        <p class="text-[#64748B]">The navigation menu doesn't collapse properly on mobile devices...</p>
-                        <div class="flex gap-1 flex-wrap">
-                            <div class="badge bg-[#FEECEC] text-[#EF4444] uppercase rounded-full py-4 border border-[#FECACA]">
-                                <img src="./assets/bug-droid.png" alt="bug droid" class="w-4 h-4">
-                                <span>Bug</span>
-                            </div>
-                            <div class="badge bg-[#FFF8DB] text-[#D97706] uppercase rounded-full py-4 border border-[#FDE68A]">
-                                <img src="./assets/lifebuoy.png" alt="" class="w-4 h-4">
-                                <span class="whitespace-nowrap">Help Wanted</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="divider"></div>
-                    <div class="px-4 pb-4 space-y-2">
-                        <p class="text-[#64748B]">#1by john_doe</p>
-                        <p class="text-[#64748B]">1/15/2024</p>
-                    </div>
+            <div class="relative">
+                <div id="issues-container" class="grid grid-cols-1 p-4 gap-4 md:grid-cols-2 lg:grid-cols-4">
+                    <span class="loading loading-spinner loading-xl absolute z-100 top-[100px] left-1/2"></span>
                 </div>
-
             </div>
+            
         </div>
     </div>
 
     <!-- Open the modal using ID.showModal() method -->
-    <button class="btn" onclick="details_modal.showModal()">open modal</button>
     <dialog id="details_modal" class="modal modal-bottom sm:modal-middle">
-        <div class="modal-box space-y-6">
-            <div>
-                <h3 class="text-lg font-bold">Fix broken image uploads</h3>
-                <div>
-                    <span class="badge bg-[#00A96E] text-white uppercase rounded-full">Open</span>
-                    <span class="text-[#64748B]">• Opened by Faham Ahmed • 1/15/2024</span>
-                </div>
-            </div>
-            <div>
-                <div class="badge rounded-full py-4 border bg-[#FEECEC] text-[#EF4444] border-[#FECACA]">
-                    <img src="./assets/bug-droid.png" alt="bug droid" class="w-4 h-4">
-                    <span>label</span>
-                </div>
-            </div>
-            <p class="text-[#64748B]">The navigation menu doesn't collapse properly on mobile devices...</p>
-            <div class="flex p-4 bg-[#F8FAFC] rounded">
-                <div class="flex-1">
-                    <p class="text-[#64748B]">Asignee:</p>
-                    <p class="font-semibold">Faham Ahmed</p>
-                </div>
-                <div class="flex-1">
-                    <p class="text-[#64748B]">Priority:</p>
-                    <p class="badge rounded-full uppercase py-4 bg-[#FEECEC] text-[#EF4444]">High</p>
-                </div>
-            </div>
-            <div class="modal-action">
-                <form method="dialog">
-                    <!-- if there is a button in form, it will close the modal -->
-                    <button class="btn btn-primary">Close</button>
-                </form>
-            </div>
-        </div>
+        
     </dialog>
 
     <script src="dashboard.js""></script>

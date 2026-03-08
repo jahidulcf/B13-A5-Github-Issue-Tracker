@@ -1,4 +1,3 @@
-
 let selected = "all"
 
 const navButtons = document.getElementById("nav-btns");
@@ -48,24 +47,14 @@ const displayIssues = (issues) => {
 
 const createIssueCard = (issue) => {
     const issueCard = document.createElement('div');
-    let priorityColor = "";
 
     const cardBorder = issue.status === "open" ? "border-[#00A96E]" : "border-[#A855F7]";
-
-    if (issue.priority === "high") {
-        priorityColor = "bg-[#FEECEC] text-[#EF4444]";
-    } else if (issue.priority === "medium") {
-        priorityColor = "bg-[#FFF6D1] text-[#F59E0B]";
-    } else {
-        priorityColor = "bg-[#EEEFF2] text-[#9CA3AF]";
-    }
 
     const date = new Date(issue.createdAt);
     const formattedDate = date.toLocaleDateString("en-US");
 
     issueCard.innerHTML = `
-        <div class="card bg-base-100 h-full shadow-sm border-t-4 ${cardBorder}">
-                    
+        <div onclick="getDetails(${issue.id})" class="card bg-base-100 h-full shadow-sm border-t-4 ${cardBorder}">
             <div class="px-4 pt-4 space-y-4 h-full flex flex-col">
                 <div class="flex items-center justify-between mb-4">
                     ${issue.status === "open" 
@@ -73,7 +62,7 @@ const createIssueCard = (issue) => {
                         : `<img src="./assets/closed-status.png" alt="closed status">`
                     }
                     
-                    <div class="badge ${priorityColor} uppercase rounded-full">${issue.priority}</div>
+                    <div class="badge ${priorityColor(issue.priority)} uppercase rounded-full">${issue.priority}</div>
                 </div>
                 <h2 class="card-title line-clamp-2">${issue.title}</h2>
                 <p class="text-[#64748B] line-clamp-2">${issue.description}</p>
@@ -111,6 +100,68 @@ const createLabel = (label) => {
             <span>${label}</span>
         </div>`;
     }
+}
+
+const getDetails = (id) => {
+    fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`)
+        .then(res => res.json())
+        .then(data => {
+            showDetails(data.data);
+        })
+}
+
+const showDetails = (issue) => {
+    const detailsModal = document.getElementById("details_modal");
+    const date = new Date(issue.createdAt);
+    const formattedDate = date.toLocaleDateString("en-US");
+
+    detailsModal.innerHTML = `
+        <div class="modal-box space-y-6">
+            <div>
+                <h3 class="text-lg font-bold">${issue.title}</h3>
+                <div>
+                    <span class="badge ${issue.status === "open" ? "bg-[#00A96E]" : "bg-[#A855F7]"} text-white uppercase rounded-full">${issue.status}</span>
+                    <span class="text-[#64748B]">• Opened by ${issue.author} • ${formattedDate}</span>
+                </div>
+            </div>
+            <div class="flex gap-1 flex-wrap mt-auto">
+                ${ issue.labels.map(label => createLabel(label)).join('')}
+            </div>
+            <p class="text-[#64748B]">The navigation menu doesn't collapse properly on mobile devices...</p>
+            <div class="flex p-4 bg-[#F8FAFC] rounded">
+                <div class="flex-1">
+                    <p class="text-[#64748B]">Asignee:</p>
+                    <p class="font-semibold">${issue.assignee ? issue.assignee : "Not assignee"}</p>
+                </div>
+                <div class="flex-1">
+                    <p class="text-[#64748B]">Priority:</p>
+                    <div class="badge ${priorityColor(issue.priority)} uppercase rounded-full">${issue.priority}</div>
+                </div>
+            </div>
+            <div class="modal-action">
+                <form method="dialog">
+                    <!-- if there is a button in form, it will close the modal -->
+                    <button class="btn btn-primary">Close</button>
+                </form>
+            </div>
+        </div>
+    `;
+    detailsModal.showModal();
+}
+
+const priorityColor = (priority) => {
+
+    let priorityColor = "";
+
+    if (priority === "high") {
+        priorityColor = "bg-[#FEECEC] text-[#EF4444]";
+    } else if (priority === "medium") {
+        priorityColor = "bg-[#FFF6D1] text-[#F59E0B]";
+    } else {
+        priorityColor = "bg-[#EEEFF2] text-[#9CA3AF]";
+    }
+
+    return priorityColor
 }
 
 getIssues();
