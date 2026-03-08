@@ -10,8 +10,6 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-    <!-- font awesome icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body class="bg-[#F8FAFC]">
     <header class="flex items-center px-[5%] py-4 bg-white shadow-sm">
@@ -41,16 +39,16 @@
 
     <div class="container mx-auto py-16 space-y-4">
         <div id="nav-btns" class="flex gap-2 bg-white p-4 shadow-sm rounded-md">
-            <button class="btn">All</button>
-            <button class="btn">Open</button>
-            <button class="btn">Closed</button>
+            <button value="all" class="btn btn-primary">All</button>
+            <button value="open" class="btn">Open</button>
+            <button value="closed" class="btn">Closed</button>
         </div>
 
         <div class="bg-[#FBFBFB] rounded-md shadow-sm">
             <div class="flex items-center p-4 bg-white shadow-sm rounded-t-md">
                 <img src="./assets/Aperture.png" alt="aperture" class="mr-4">
                 <div class="flex-1">
-                    <p class="font-semibold text-lg">50 Issues</p>
+                    <p class="font-semibold text-lg"><span id="issues-counter">0</span> Issues</p>
                     <p class="text-sm text-[#64748B]">Track and manage your project issues</p>
                 </div>
                 <div class="space-x-4">
@@ -76,7 +74,7 @@
                             <img src="./assets/Open-Status.png" alt="open status">
                             <div class="badge bg-[#FEECEC] text-[#EF4444] uppercase rounded-full">High</div>
                         </div>
-                        <h2 class="card-title">Fix navigation menu on mobile devices</h2>
+                        <h2 class="card-title line-clamp-2">Fix navigation menu on mobile devices</h2>
                         <p class="text-[#64748B]">The navigation menu doesn't collapse properly on mobile devices...</p>
                         <div class="flex gap-1 flex-wrap">
                             <div class="badge bg-[#FEECEC] text-[#EF4444] uppercase rounded-full py-4 border border-[#FECACA]">
@@ -99,6 +97,43 @@
             </div>
         </div>
     </div>
+
+    <!-- Open the modal using ID.showModal() method -->
+    <button class="btn" onclick="details_modal.showModal()">open modal</button>
+    <dialog id="details_modal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box space-y-6">
+            <div>
+                <h3 class="text-lg font-bold">Fix broken image uploads</h3>
+                <div>
+                    <span class="badge bg-[#00A96E] text-white uppercase rounded-full">Open</span>
+                    <span class="text-[#64748B]">• Opened by Faham Ahmed • 1/15/2024</span>
+                </div>
+            </div>
+            <div>
+                <div class="badge rounded-full py-4 border bg-[#FEECEC] text-[#EF4444] border-[#FECACA]">
+                    <img src="./assets/bug-droid.png" alt="bug droid" class="w-4 h-4">
+                    <span>label</span>
+                </div>
+            </div>
+            <p class="text-[#64748B]">The navigation menu doesn't collapse properly on mobile devices...</p>
+            <div class="flex p-4 bg-[#F8FAFC] rounded">
+                <div class="flex-1">
+                    <p class="text-[#64748B]">Asignee:</p>
+                    <p class="font-semibold">Faham Ahmed</p>
+                </div>
+                <div class="flex-1">
+                    <p class="text-[#64748B]">Priority:</p>
+                    <p class="badge rounded-full uppercase py-4 bg-[#FEECEC] text-[#EF4444]">High</p>
+                </div>
+            </div>
+            <div class="modal-action">
+                <form method="dialog">
+                    <!-- if there is a button in form, it will close the modal -->
+                    <button class="btn btn-primary">Close</button>
+                </form>
+            </div>
+        </div>
+    </dialog>
 
     <script src="dashboard.js""></script>
 </body>
