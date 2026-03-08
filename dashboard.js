@@ -2,6 +2,7 @@ let selected = "all"
 
 const navButtons = document.getElementById("nav-btns");
 const issuesCounter = document.getElementById("issues-counter");
+const searchInput = document.getElementById("search-input");
 
 navButtons.addEventListener('click', (e) => {
     const button = e.target.closest("button")
@@ -13,10 +14,18 @@ navButtons.addEventListener('click', (e) => {
     }
 
     selected = button.value
-    console.log(selected);
     button.classList.add("btn-primary");
 
     getIssues();
+})
+
+searchInput.addEventListener("input", (e) => {
+    let value = e.target.value;
+    if (value.length > 0) {
+        searchIssues(value);
+    } else {
+        getIssues();
+    }
 })
 
 const getIssues = () => {
@@ -27,21 +36,46 @@ const getIssues = () => {
         })
 }
 
+const getDetails = (id) => {
+    fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`)
+        .then(res => res.json())
+        .then(data => {
+            showDetails(data.data);
+        })
+}
+
+const searchIssues = (str) => {
+    let url = `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${str}`
+    fetch(url)
+        .then(res => res.json())
+        .then(data => {
+            displayIssues(data.data);
+        })
+}
+
 const displayIssues = (issues) => {
     const issuesContainer = document.getElementById("issues-container");
     issuesContainer.innerHTML = '';
 
-    for (const issue of issues) {
-        if (selected == "open" && issue.status == "open") {
-            issuesCounter.innerHTML = issues.filter(issue => issue.status == "open").length;
+    if (selected == "open") {
+        issuesCounter.innerHTML = issues.filter(issue => issue.status == "open").length;
+        issues.forEach(issue => {
+            if (issue.status == "open") {
+                issuesContainer.appendChild(createIssueCard(issue));
+            }
+        });
+    } else if (selected == "closed") {
+        issuesCounter.innerHTML = issues.filter(issue => issue.status == "closed").length;
+        issues.forEach(issue => {
+            if (issue.status == "closed") {
+                issuesContainer.appendChild(createIssueCard(issue));
+            }
+        });
+    } else if (selected == "all") {
+        issuesCounter.innerHTML = issues.length;
+        issues.forEach(issue => {
             issuesContainer.appendChild(createIssueCard(issue));
-        } else if (selected == "closed" && issue.status == "closed") {
-            issuesCounter.innerHTML = issues.filter(issue => issue.status == "closed").length;
-            issuesContainer.appendChild(createIssueCard(issue));
-        } else if (selected == "all") {
-            issuesCounter.innerHTML = issues.length;
-            issuesContainer.appendChild(createIssueCard(issue));
-        }
+        });
     }
 }
 
@@ -100,14 +134,6 @@ const createLabel = (label) => {
             <span>${label}</span>
         </div>`;
     }
-}
-
-const getDetails = (id) => {
-    fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`)
-        .then(res => res.json())
-        .then(data => {
-            showDetails(data.data);
-        })
 }
 
 const showDetails = (issue) => {
