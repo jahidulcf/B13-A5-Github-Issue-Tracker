@@ -59,26 +59,12 @@ const displayIssues = (issues) => {
     const issuesContainer = document.getElementById("issues-container");
     issuesContainer.innerHTML = '';
 
-    if (selected == "open") {
-        issuesCounter.innerHTML = issues.filter(issue => issue.status == "open").length;
-        issues.forEach(issue => {
-            if (issue.status == "open") {
-                issuesContainer.appendChild(createIssueCard(issue));
-            }
-        });
-    } else if (selected == "closed") {
-        issuesCounter.innerHTML = issues.filter(issue => issue.status == "closed").length;
-        issues.forEach(issue => {
-            if (issue.status == "closed") {
-                issuesContainer.appendChild(createIssueCard(issue));
-            }
-        });
-    } else if (selected == "all") {
-        issuesCounter.innerHTML = issues.length;
-        issues.forEach(issue => {
-            issuesContainer.appendChild(createIssueCard(issue));
-        });
-    }
+    const filteredIssues = selected == "all" ? issues : issues.filter(issue => issue.status == selected);
+    issuesCounter.innerHTML = filteredIssues.length == 0 ? "0" : filteredIssues.length;
+
+    filteredIssues.forEach(issue => {
+        issuesContainer.appendChild(createIssueCard(issue));
+    })
 }
 
 const createIssueCard = (issue) => {
