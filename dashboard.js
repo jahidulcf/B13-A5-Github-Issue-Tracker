@@ -141,7 +141,7 @@ const showDetails = (issue) => {
             <div class="flex gap-1 flex-wrap mt-auto">
                 ${ issue.labels.map(label => createLabel(label)).join('')}
             </div>
-            <p class="text-[#64748B]">The navigation menu doesn't collapse properly on mobile devices...</p>
+            <p class="text-[#64748B]">${issue.description}</p>
             <div class="flex p-4 bg-[#F8FAFC] rounded">
                 <div class="flex-1">
                     <p class="text-[#64748B]">Asignee:</p>
