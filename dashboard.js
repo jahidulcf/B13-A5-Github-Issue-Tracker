@@ -5,6 +5,8 @@ const issuesCounter = document.getElementById("issues-counter");
 const searchInput = document.getElementById("search-input");
 
 navButtons.addEventListener('click', (e) => {
+
+    // prevent click event other than buttons
     const button = e.target.closest("button")
     if (!button) return;
 
@@ -31,16 +33,16 @@ searchInput.addEventListener("input", (e) => {
 const getIssues = () => {
     fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues')
         .then(res => res.json())
-        .then(data => {
-            displayIssues(data.data);
+        .then(json => {
+            displayIssues(json.data);
         })
 }
 
 const getDetails = (id) => {
     fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`)
         .then(res => res.json())
-        .then(data => {
-            showDetails(data.data);
+        .then(json => {
+            showDetails(json.data);
         })
 }
 

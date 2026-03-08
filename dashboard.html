@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- title and fav icon  -->
     <title>GitHub Issue Tracker - Dashboard</title>
     <link rel="shortcut icon" href="./assets/github-logo.png" type="image/x-icon">
 
@@ -38,6 +40,8 @@
     </header>
 
     <div class="container mx-auto py-16 space-y-4">
+
+        <!-- nav buttons -->
         <div id="nav-btns" class="flex gap-2 bg-white p-4 shadow-sm rounded-md">
             <button value="all" class="btn btn-primary">All</button>
             <button value="open" class="btn">Open</button>
@@ -75,7 +79,7 @@
 
     <!-- Open the modal using ID.showModal() method -->
     <dialog id="details_modal" class="modal modal-bottom sm:modal-middle">
-        
+        <!-- issues will dynamically add here -->
     </dialog>
 
     <script src="dashboard.js""></script>
