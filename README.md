@@ -2,11 +2,13 @@
   - https://github.com/jahidulcf/B13-A5-Github-Issue-Tracker
 
 **Live Site Link:**
-  - comming soon
+  - https://jahidulcf.github.io/B13-A5-Github-Issue-Tracker/
 
+**LinkedIn link:**
+  - https://www.linkedin.com/in/jahidul7/
   
 ---
-#### Assignment QNA below 
+#### Assignment Q&A below 
 
 
     1️⃣ What is the difference between var, let, and const?
